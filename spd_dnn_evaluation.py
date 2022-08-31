@@ -54,7 +54,8 @@ if __name__ == '__main__':
     ftr_hz = 50
     collect_hz = 250
 
-    model = load_spd_dnn(trained_model='./spd_dnn_weight_ftrHz%d.pt' % ftr_hz)
+    model = load_spd_dnn(trained_model='./spd_dnn_weight_ftrHz%d.pt' % ftr_hz,
+                         ftr_hz=ftr_hz, collect_hz=collect_hz)
     model.eval()
 
     ftr_generator = ftrGenerator(ftr_hz=ftr_hz, collect_hz=collect_hz)

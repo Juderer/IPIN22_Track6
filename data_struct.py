@@ -9,6 +9,8 @@
 import os
 import sys
 
+import numpy as np
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from coord_utils import *
 
@@ -82,9 +84,9 @@ class gyroUnit():
         _items = line.strip().split(';')
         self.app_ts = float(_items[1])
         self.sensor_ts = float(_items[2])
-        self.gyr_x = float(_items[3])
-        self.gyr_y = float(_items[4])
-        self.gyr_z = float(_items[5])
+        self.gyr_x = float(_items[3]) * 180.0 / np.pi
+        self.gyr_y = float(_items[4]) * 180.0 / np.pi
+        self.gyr_z = float(_items[5]) * 180.0 / np.pi
         self.accuracy = int(_items[6])
 
     @property
@@ -119,3 +121,25 @@ class ahrsUnit():
 
     def __repr__(self):
         return '%.3f,%.3f,%.3f,%.3f' % (self.app_ts, self.pitch_x, self.roll_y, self.yaw_z)
+
+
+class posiUnit():
+    def __init__(self, line):
+        assert isinstance(line, str) and line.startswith('POSI')
+        _items = line.split(';')
+        self.gps_tow = float(_items[1])
+        self.lat = float(_items[2])
+        self.lng = float(_items[3])
+        self.altitude = float(_items[4])
+        self.lng_gcj02, self.lat_gcj02 = geo_util.wgs84_to_gcj02(self.lng, self.lat)
+
+    @property
+    def loc_wgs84_str(self):
+        return '%.6f,%.6f' % (self.lng, self.lat)
+
+    @property
+    def loc_gcj02_str(self):
+        return '%.6f,%.6f' % (self.lng_gcj02, self.lat_gcj02)
+
+    def __repr__(self):
+        return '%.3f,%.6f,%.6f' % (self.gps_tow, self.lng, self.lat)
