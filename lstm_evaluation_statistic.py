@@ -424,7 +424,6 @@ if __name__ == '__main__':
         for spd_err in gross_spd_err_list:
             fd.write('%.2f\n' % spd_err)
 
-    # TODO::最后一条轨迹有疑问?
     # spd_sum_err_list = spd_sum_err_list[:-1]
     # final_dist_err_list = final_dist_err_list[:-1]
     print([round(x, 2) for x in spd_sum_err_list])
