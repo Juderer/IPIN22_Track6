@@ -24,8 +24,10 @@ class gnssUnit():
         self.lng = float(_items[3])
         self.altitude = float(_items[4])
         self.bearing = float(_items[5])
-        self.accuracy = float(_items[6])
-        self.speed = float(_items[7])
+        # self.accuracy = float(_items[6])
+        # self.speed = float(_items[7])
+        self.speed = float(_items[6])
+        self.accuracy = float(_items[7])
         self.gps_tow = float(_items[8])
         self.satellite_in_view = int(_items[9])
         self.satellite_in_use = int(_items[10])
@@ -42,10 +44,11 @@ class gnssUnit():
 
     @property
     def loc_speed(self):
-        if self.pre_gnss is None:
-            return -1
-        pre_spd = geo_util.distance(self.lng, self.lat, self.pre_gnss.lng, self.pre_gnss.lat)
-        return pre_spd
+        # if self.pre_gnss is None:
+        #     return -1
+        # pre_spd = geo_util.distance(self.lng, self.lat, self.pre_gnss.lng, self.pre_gnss.lat)
+        # return max(0.0, min(33.0, pre_spd))
+        return self.speed
 
     def __repr__(self):
         return '%.3f,%.6f,%.6f,%.3f,%.3f' % (self.app_ts, self.lng, self.lat, self.bearing, self.speed)
