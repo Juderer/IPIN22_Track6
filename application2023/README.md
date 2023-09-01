@@ -1,16 +1,15 @@
 # Detailed Introduction
 
 <!-- ![system overview](./images/overview.png) -->
+
 <div align='center'>
-<img src=../application/images/overview.png width=60% />
+<img src=./images/overview.png width=60% />
 </div>
 <center>Figure 1: System Overview</center>
 
-As shown in Figure 1, different from the traditional speed estimation method based on attitude calculation and acceleration integration, we designed a supervised deep learning model (Speed DNN Model) for estimating vehicle speed, and estimated the vehicle heading (Bearing Estimation) decoupled from the vehicle speed estimation function.
+As shown in Figure 1, different from the traditional speed estimation method based on attitude calculation and acceleration integration, we designed a supervised deep learning model (Speed DNN Model) for estimating vehicle speed, and estimated the vehicle heading (Bearing Estimation) decoupled from the vehicle speed estimation function in indoor environments. Meanwhile, in outdoor environments, we utilize Extended Kalman Filter (EKF) in order to improve the location of vehicle when GNSS signals and IMU in the smartphone are valid.
 
-The overall workflow is divided into two lines: model training and model inference. During model training, we use the provided testing data with high-quality GNSS information to build a training dataset with ground-truth speeds. Among them, we have designed two schemes for the use of inertial data. The first solution is to input the original sampled data (Raw Data) into the deep learning model without additional processing of the inertial data. The second solution: we designed a feature extraction module (Feature Extraction) to calculate the features of the three axes of the accelerometer and the gyroscope in seconds. Compared with using the original data directly, the use of the extracted eigenvalues has the disadvantage of losing part of the original data information, but it has the advantages of simplifying the amount of model computation and facilitating subsequent tuning. When using the model to infer the speed, we need to combine the heading angle obtained by the heading estimation algorithm to finally determine the position change of the vehicle.
-
-In addition, we utilize Extended Kalman Filter (EKF) in order to improve the location of vehicle when GNSS signals and IMU in the smartphone are valid in outdoors.
+The overall workflow of DNN model is divided into two lines: model training and model inference. During model training, we use the provided testing data with high-quality GNSS information to build a training dataset with ground-truth speeds. Among them, we have designed two schemes for the use of inertial data. The first solution is to input the original sampled data (Raw Data) into the deep learning model without additional processing of the inertial data. The second solution: we designed a feature extraction module (Feature Extraction) to calculate the features of the three axes of the accelerometer and the gyroscope in seconds. Compared with using the original data directly, the use of the extracted eigenvalues has the disadvantage of losing part of the original data information, but it has the advantages of simplifying the amount of model computation and facilitating subsequent tuning. When using the model to infer the speed, we need to combine the heading angle obtained by the heading estimation algorithm to finally determine the position change of the vehicle.
 
 ## Speed DNN Model
 
@@ -20,7 +19,7 @@ We designed the speed network structure into three modules, which are Embedding 
 
 <!-- ![Feature Engineering](./images//feature_engineering.png) -->
 <div align='center'>
-<img src=../application/images/feature_engineering.png width=40% />
+<img src=./images/feature_engineering.png width=40% />
 </div>
 <center>Figure 2: Feature Engineering</center>
 
@@ -28,7 +27,7 @@ The embedding layer is used to process and fuse the features of inertial data. B
 
 <!-- ![Embedding Layer](./images/embedding_layer.png) -->
 <div align='center'>
-<img src=../application/images/embedding_layer.png width=50% />
+<img src=./images/embedding_layer.png width=50% />
 </div>
 <center>Figure 3: Embeddiong Layer</center>
 
@@ -38,7 +37,7 @@ The embedding layer takes the features of the accelerometer (ACCE) and the gyros
 
 <!-- ![Embedding Layer](./images/representation_layer.png) -->
 <div align='center'>
-<img src=../application/images/representation_layer.png width=60% />
+<img src=./images/representation_layer.png width=60% />
 </div>
 <center>Figure 4: Representation Layer</center>
 
@@ -48,7 +47,7 @@ For the design of the representation layer, we directly choose a representative 
 
 <!-- ![Regression Layer](./images/regression_layer.png) -->
 <div align='center'>
-<img src=../application/images/regression_layer.png width=60% />
+<img src=./images/regression_layer.png width=60% />
 </div>
 <center>Figure 5: Regression Layer</center>
 
