@@ -1,0 +1,8 @@
+demo2023:
+    datafile: ../trials2023/mate20MeaDataRecorder_testingData.txt
+    commsep: '%'
+    sepch: ';'
+    V: 3
+    S: 15
+    inipos: 40.002208,116.385118,85.000
+    reloadable: True
