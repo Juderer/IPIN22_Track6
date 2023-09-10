@@ -44,7 +44,7 @@ class ftrGenerator():
         # self.ftr_conf = ftrConf(conf_path)
         self.func_map = {'mean': np.mean, 'std': np.std, 'min': np.min, 'max': np.max}
 
-    def calc_imu_sec_ftr(self, sen_unit_list):
+    def calc_imu_sec_ftr(self, sen_unit_list, check_thre=False):
         assert len(sen_unit_list) == self.collect_hz
 
         sen_xs = [u.sen_x for u in sen_unit_list]

@@ -126,7 +126,7 @@ def test_model(testing_loader):
 
 
 if __name__ == '__main__':
-    ftr_hz = 50
+    ftr_hz = 25
     collect_hz = 250
     if len(sys.argv) > 1:
         ftr_hz = int(sys.argv[1])
@@ -144,7 +144,9 @@ if __name__ == '__main__':
                                            dataset=testing_dataset,
                                            collate_fn=MyDataset.my_collate_fn,
                                            shuffle=False)
-    model = load_spd_dnn(ftr_hz=ftr_hz, collect_hz=collect_hz)
+    model = load_spd_dnn(ftr_hz=ftr_hz, collect_hz=collect_hz, pretrained_model='./spd_dnn_weight_ftrHz25.pt')
+    torch.save(model, 'model.pth')
+    # exit(0)
 
     loss_fn = SmoothL1Loss()
     optimizer = Adam(model.parameters(), lr=1e-3)

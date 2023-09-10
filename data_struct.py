@@ -146,3 +146,14 @@ class posiUnit():
 
     def __repr__(self):
         return '%.3f,%.6f,%.6f' % (self.gps_tow, self.lng, self.lat)
+
+
+class obdUnit():
+    def __init__(self, line):
+        assert isinstance(line, str) and line.startswith('OBD')
+        _items = line.split(';')
+        self.app_ts = float(_items[1])
+        self.vehicle_speed = float(_items[2])
+
+    def __repr__(self):
+        return '%.3f,%.2f' % (self.app_ts, self.vehicle_speed)

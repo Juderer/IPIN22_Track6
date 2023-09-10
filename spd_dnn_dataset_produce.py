@@ -101,7 +101,7 @@ def gen_dnn_training_dataset(sec_unit_arr, ftr_generator=None):
 
 
 if __name__ == '__main__':
-    ftr_hz = 50
+    ftr_hz = 25
     collect_hz = 250
     if len(sys.argv) > 1:
         ftr_hz = int(sys.argv[1])
@@ -111,8 +111,11 @@ if __name__ == '__main__':
 
     ftr_generator = ftrGenerator(ftr_hz=ftr_hz, collect_hz=collect_hz)
 
-    testing_path_list = ['./trials/IPIN2022_T7_TestingTrial01.txt',
-                         './trials/IPIN2022_T7_TestingTrial02.txt']
+    # testing_path_list = ['./trials/IPIN2022_T7_TestingTrial01.txt',
+    #                      './trials/IPIN2022_T7_TestingTrial02.txt']
+
+    testing_path_list = ['./trials2023/mate20MeaDataRecorder_testingData.txt']
+
     sample_str_list = []
     for path in testing_path_list:
         unit_list = load_testing_data(path)

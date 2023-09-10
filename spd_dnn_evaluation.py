@@ -51,7 +51,7 @@ def infer_speed(sec_acc_unit_list, sec_gyro_unit_list, crnt_spd,
 
 
 if __name__ == '__main__':
-    ftr_hz = 50
+    ftr_hz = 25
     collect_hz = 250
 
     model = load_spd_dnn(trained_model='./spd_dnn_weight_ftrHz%d.pt' % ftr_hz,
