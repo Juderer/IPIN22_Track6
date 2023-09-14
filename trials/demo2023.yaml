@@ -4,5 +4,5 @@ demo2023:
     sepch: ';'
     V: 3
     S: 15
-    inipos: 40.002208,116.385118,85.000
-    reloadable: True
+    inipos: 40.002201,116.385107,91.500
+    reloadable: False
